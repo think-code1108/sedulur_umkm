@@ -1,0 +1,1 @@
+# sedulur_umkm

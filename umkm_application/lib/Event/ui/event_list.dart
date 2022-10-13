@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:umkm_application/Model/event.dart';
 import 'package:umkm_application/data/repositories/shared_pref_repositories.dart';
 import 'package:umkm_application/widget/event_card.dart';
+import 'package:umkm_application/widget/title.dart';
 
 class EventPage extends StatefulWidget {
   EventPage({Key? key}) : super(key: key);
@@ -18,24 +19,6 @@ class _EventPageState extends State<EventPage> {
   CollectionReference events = FirebaseFirestore.instance.collection('events');
   bool _upcomingVisible = false;
   bool _pastVisible = false;
-
-  Widget _title() {
-    return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
-        child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text('Event List',
-                        style: GoogleFonts.lato(
-                            color: ConstColor.textDatalab,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700))
-                  ])
-            ]));
-  }
 
   Widget _eventList(bool isExpired) {
     var dateNow = DateTime.now();
@@ -180,7 +163,7 @@ class _EventPageState extends State<EventPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      _title(),
+                      titleApp('Event List'),
                       SizedBox(height: 10),
                       _upcomingEventTitle("Event Berikutnya"),
                       Visibility(

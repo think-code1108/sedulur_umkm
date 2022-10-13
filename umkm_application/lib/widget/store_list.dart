@@ -32,21 +32,21 @@ class StoreList extends StatelessWidget {
               },
               child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 160,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  height: 120,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                   child: Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       elevation: 3,
                       child: Padding(
-                        padding: EdgeInsets.all(15),
+                        padding: EdgeInsets.symmetric(vertical:  5, horizontal: 10),
                         child: Wrap(
                           direction: Axis.vertical,
                           children: [
                             CircleAvatar(
                               backgroundImage: NetworkImage(store.image != ''
                                   ? store.image
-                                  : 'https://firebasestorage.googleapis.com/v0/b/umkm-application.appspot.com/o/store_default_icon.png?alt=media&token=6f762ddb-d559-493f-878e-da794afb84c9'),
+                                  : 'https://firebasestorage.googleapis.com/v0/b/sadulur-umkm-app.appspot.com/o/store_default_icon.png?alt=media&token=3c8774b7-cc80-432a-95e8-12bd03e48592'),
                               minRadius: 30,
                               maxRadius: 50,
                               backgroundColor: ConstColor.lightgreyBG,
@@ -62,7 +62,7 @@ class StoreList extends StatelessWidget {
                                     Text(store.name,
                                         overflow: TextOverflow.fade,
                                         style: GoogleFonts.lato(
-                                            color: ConstColor.textDatalab,
+                                            color: ConstColor.secondaryTextDatalab,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16)),
                                     SizedBox(
@@ -77,7 +77,7 @@ class StoreList extends StatelessWidget {
                                             color: ConstColor.textDatalab,
                                             fontWeight: FontWeight.normal,
                                             fontSize: 14)),
-                                    SizedBox(height: 15),
+                                    SizedBox(height: 5),
                                     // _makeLabel("Food"),
                                     Wrap(
                                         direction: Axis.horizontal,

@@ -16,19 +16,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> mapEventToState(
     LoginEvent event,
   ) async* {
-        if (event is SignInButtonPressed){
+    if (event is SignInButtonPressed) {
       yield LoginLoading();
 
       try {
         var user = await UserRepository.signIn(event.email, event.password);
-        if (user != null){
-          yield LoginSucceed(user:user);
+        if (user != null) {
+          yield LoginSucceed(user: user);
         } else {
-          yield LoginFailed(message: 'Email atau Password yang digunakan salah');
+          yield LoginFailed(
+              message: 'Email atau Password yang digunakan salah');
         }
-      } catch(e){
+      } catch (e) {
         yield LoginFailed(message: e.toString());
       }
-    }
+    } 
   }
 }

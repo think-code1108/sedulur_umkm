@@ -14,6 +14,8 @@ import 'package:umkm_application/data/repositories/user_repositories.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 
+import '../../widget/title.dart';
+
 class DummyStatisticPage extends StatefulWidget {
   DummyStatisticPage({Key? key, required this.title}) : super(key: key);
 
@@ -142,28 +144,24 @@ class _DummyStatisticPageState extends State<DummyStatisticPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Container(
-      height: height,
-      child: Stack(
-        children: <Widget>[
-          Center(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
+      body: SafeArea(
+        child: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                  Color(0xfffbfbfb),
+                  Color(0xfff7f7f7),
+                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      'Product Analysis',
-                      style: GoogleFonts.lato(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 28,
-                          color: ConstColor.darkDatalab),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    titleApp('Product Analysis'),
+                    SizedBox(height: height * 0.07),
                     Text(
                       'Dapatkan analisa secara nyata dari sosial media untuk produk-produk yang kamu jual! Data ini bisa digunakan untuk menganalisa penjualan dan penerimaan produk dalam masyarakat!',
                       style: GoogleFonts.lato(
@@ -185,9 +183,9 @@ class _DummyStatisticPageState extends State<DummyStatisticPage> {
                 ),
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

@@ -19,9 +19,9 @@ class CategoryTab extends StatelessWidget {
             splashColor: Colors.transparent,
             onTap: () => onSelected(model),
             child : Container(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 14),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical:15),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical:10),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),

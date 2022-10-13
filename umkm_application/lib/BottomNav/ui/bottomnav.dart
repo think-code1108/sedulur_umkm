@@ -55,8 +55,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
       PersistentBottomNavBarItem(
           icon: Icon(Icons.home),
           title: "Home",
-          activeColorPrimary: ConstColor.darkDatalab,
-          inactiveColorPrimary: Colors.grey,
+          activeColorPrimary: ConstColor.secondaryTextDatalab,
+          inactiveColorPrimary: Colors.blueGrey,
           routeAndNavigatorSettings: RouteAndNavigatorSettings(
               initialRoute: '/home',
               onGenerateRoute: (RouteSettings settings) {
@@ -83,8 +83,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
       PersistentBottomNavBarItem(
           icon: Icon(Icons.event),
           title: ("Event"),
-          activeColorPrimary: ConstColor.darkDatalab,
-          inactiveColorPrimary: Colors.grey,
+          activeColorPrimary: ConstColor.secondaryTextDatalab,
+          inactiveColorPrimary: Colors.blueGrey,
           routeAndNavigatorSettings: RouteAndNavigatorSettings(
               initialRoute: '/event',
               onGenerateRoute: (RouteSettings settings) {
@@ -99,20 +99,20 @@ class _BottomNavigationState extends State<BottomNavigation> {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.people),
         title: ("Coaching"),
-        activeColorPrimary: ConstColor.darkDatalab,
-        inactiveColorPrimary: Colors.grey,
+        activeColorPrimary: ConstColor.secondaryTextDatalab,
+        inactiveColorPrimary:  Colors.blueGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.insert_chart_outlined),
         title: ("Statistic"),
-        activeColorPrimary: ConstColor.darkDatalab,
-        inactiveColorPrimary: Colors.grey,
+        activeColorPrimary: ConstColor.secondaryTextDatalab,
+        inactiveColorPrimary:  Colors.blueGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.announcement_outlined),
         title: ("Announce"),
-        activeColorPrimary: ConstColor.darkDatalab,
-        inactiveColorPrimary: Colors.grey,
+        activeColorPrimary: ConstColor.secondaryTextDatalab,
+        inactiveColorPrimary: Colors.blueGrey,
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
               initialRoute: '/announcement',
               onGenerateRoute: (RouteSettings settings) {
@@ -128,8 +128,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
       PersistentBottomNavBarItem(
           icon: Icon(MdiIcons.faceManProfile),
           title: ("Profile"),
-          activeColorPrimary: ConstColor.darkDatalab,
-          inactiveColorPrimary: Colors.grey,
+          activeColorPrimary: ConstColor.secondaryTextDatalab,
+          inactiveColorPrimary:Colors.blueGrey,
           routeAndNavigatorSettings: RouteAndNavigatorSettings(
               initialRoute: '/profile',
               onGenerateRoute: (RouteSettings settings) {
@@ -182,7 +182,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
-          NavBarStyle.style3, // Choose the nav bar style with this property
+          NavBarStyle.style9, // Choose the nav bar style with this property
     );
   }
 }

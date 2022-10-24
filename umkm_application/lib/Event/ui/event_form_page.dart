@@ -4,7 +4,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+// import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:umkm_application/Const/const_color.dart';
 import 'package:umkm_application/Event/bloc/bloc/event_bloc.dart';
@@ -83,17 +83,19 @@ class _EventFormPageState extends State<EventFormPage> {
             height: 10,
           ),
           isCP
-              ? InternationalPhoneNumberInput(
-                  onInputChanged: (PhoneNumber number) {
-                    print(number.phoneNumber);
-                  },
-                  selectorConfig: SelectorConfig(
-                    selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                  ),
-                  ignoreBlank: false,
-                  selectorTextStyle: TextStyle(color: ConstColor.textDatalab),
-                  textFieldController: controller,
-                )
+              ? TextField(
+                  controller: controller,
+                  obscureText: isPassword,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      prefixIcon: entryIcon,
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: ConstColor.darkDatalab),
+                          borderRadius: BorderRadius.circular(15)),
+                      fillColor: Color(0xfff3f3f4),
+                      filled: true,
+                      hintText: hintText))
               : TextField(
                   controller: controller,
                   obscureText: isPassword,
@@ -311,9 +313,9 @@ class _EventFormPageState extends State<EventFormPage> {
             "Masukkan link pendaftaran untuk event apabila ada", linkController,
             entryIcon:
                 Icon(Icons.link_outlined, color: ConstColor.darkDatalab)),
-        _entryField("Kontak Panitia",
-            "Masukkan Kontak Panitia yang dapat dihubungi", cpController,
-            isCP: true),
+         _entryField("Kontak Panitia", "Masukkan Kontak Panitia yang dapat dihubungi",
+            cpController, isCP: true,
+            entryIcon: Icon(Icons.phone_android_outlined, color: ConstColor.darkDatalab)),            
         _datePicker("Tanggal Event"),
         _imagePicker("Gambar Event")
       ],

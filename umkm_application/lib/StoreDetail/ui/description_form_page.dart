@@ -1,23 +1,15 @@
-// ------------------------------------------ //
-// Template from : TheAlphamerc               //
-// Github : TheAlphamerc/flutter_login_signup //
-// ------------------------------------------ //
 
 import 'package:another_flushbar/flushbar.dart';
-// import 'package:custom_radio_grouped_button/CustomButtons/ButtonTextStyle.dart';
-// import 'package:custom_radio_grouped_button/CustomButtons/CustomCheckBoxGroup.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
-
 import 'package:flutter/material.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:umkm_application/Const/const_color.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:umkm_application/Model/store.dart';
 import 'package:umkm_application/StoreDetail/bloc/store_bloc.dart';
 import 'package:umkm_application/data/repositories/shared_pref_repositories.dart';
+
 
 class StoreFormPage extends StatefulWidget {
   StoreFormPage({required this.store, Key? key}) : super(key: key);
@@ -65,8 +57,8 @@ class _StoreFormPageState extends State<StoreFormPage> {
             ),
             Text('Kembali',
                 style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                     color: ConstColor.secondaryTextDatalab))
           ],
         ),
@@ -90,14 +82,30 @@ class _StoreFormPageState extends State<StoreFormPage> {
             height: 10,
           ),
           isCP
-              ? InternationalPhoneNumberInput(
-                  onInputChanged: (PhoneNumber number) {},
-                  selectorConfig: SelectorConfig(
-                    selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                  ),
-                  ignoreBlank: false,
-                  selectorTextStyle: TextStyle(color: ConstColor.textDatalab),
-                  textFieldController: controller,
+              ?
+              // InternationalPhoneNumberInput(
+              //   onInputChanged: (PhoneNumber number) {},
+              //   selectorConfig: SelectorConfig(
+              //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+              //   ),
+              //   ignoreBlank: false,
+              //   selectorTextStyle: TextStyle(color: ConstColor.textDatalab),
+              //   textFieldController: controller,
+              // )
+
+              TextField(
+                  controller: controller,
+                  obscureText: isPassword,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      prefixIcon: entryIcon,
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: ConstColor.darkDatalab),
+                          borderRadius: BorderRadius.circular(15)),
+                      fillColor: Color(0xfff3f3f4),
+                      filled: true,
+                      hintText: hintText),
                 )
               : TextField(
                   controller: controller,
@@ -375,9 +383,9 @@ class _StoreFormPageState extends State<StoreFormPage> {
         _entryField("Deskripsi UMKM", "Masukkan deskripsi detail mengenai UMKM",
             descriptionController,
             entryIcon: Icon(Icons.list_alt, color: ConstColor.darkDatalab)),
-        _entryField("Nomor Telepon", "Masukkan nomor telepon UMKM",
-            phoneNumberController,
-            isCP: true),
+         _entryField("Nomor Telepon", "Masukkan nomor telepon UMKM",
+            phoneNumberController, isCP:true,
+            entryIcon: Icon(Icons.phone_android_outlined, color: ConstColor.darkDatalab)),
         // _datePicker("Tanggal Event"),
         // _imagePicker("Gambar Event")
       ],
@@ -501,14 +509,14 @@ class _StoreFormPageState extends State<StoreFormPage> {
               children: <Widget>[
                 Positioned(top: 40, left: 0, child: _backButton()),
                 Container(
+                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(height: height * .1),
-                        // _title(),
+                        // SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                         _form(),
                         _tagsField(),
                         _socialMediaField(),

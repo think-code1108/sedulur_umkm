@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+// import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:umkm_application/Const/const_color.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:umkm_application/Model/product.dart';
@@ -85,17 +85,18 @@ class _ProductFormPageState extends State<ProductFormPage> {
             height: 10,
           ),
           isCP
-              ? InternationalPhoneNumberInput(
-                  onInputChanged: (PhoneNumber number) {
-                    print(number.phoneNumber);
-                  },
-                  selectorConfig: SelectorConfig(
-                    selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                  ),
-                  ignoreBlank: false,
-                  selectorTextStyle: TextStyle(color: Colors.black),
-                  textFieldController: controller,
-                )
+              ? TextField(
+                  controller: controller,
+                  obscureText: isPassword,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      prefixIcon: entryIcon,
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: ConstColor.darkDatalab),
+                          borderRadius: BorderRadius.circular(15)),
+                      fillColor: Color(0xfff3f3f4),
+                      filled: true,
+                      hintText: hintText))
               : TextField(
                   controller: controller,
                   obscureText: isPassword,
@@ -348,7 +349,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
   @override
   void dispose() {
     nameProductController.dispose();
-    descriptionController.dispose();
+    priceController.dispose();
     descriptionController.dispose();
     super.dispose();
   }
@@ -474,6 +475,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     MaterialPageRoute(
                         builder: (context) => StoreDetail(
                               uid: umkmid,
+                              isFromProfilePage: false,
                             ))));
       }
 

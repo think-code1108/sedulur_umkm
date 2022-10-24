@@ -115,7 +115,7 @@ class AlmostEndFloatFabLocation extends StandardFabLocation
   double getOffsetX(
       ScaffoldPrelayoutGeometry scaffoldGeometry, double adjustment) {
     final double directionalAdjustment =
-        scaffoldGeometry.textDirection == TextDirection.ltr ? 5.0 : 0;
+        scaffoldGeometry.textDirection == TextDirection.ltr ? 05.0 : 0;
     return super.getOffsetX(scaffoldGeometry, adjustment) +
         directionalAdjustment;
   }

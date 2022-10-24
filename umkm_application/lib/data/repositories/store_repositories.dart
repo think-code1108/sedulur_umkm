@@ -46,6 +46,9 @@ class StoreRepository {
             'umkm_name': store.name,
           });
         } else {
+
+          print('insert data store nih');
+
           stores.doc(store.id).set({
             'email' : store.email,
             'address': store.address,

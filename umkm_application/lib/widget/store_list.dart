@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:umkm_application/Const/const_color.dart';
+import 'package:umkm_application/Const/const_path.dart';
 import 'package:umkm_application/Model/store.dart';
 import 'package:umkm_application/StoreDetail/ui/store_detail.dart';
 import 'package:umkm_application/data/repositories/statistic_repositories.dart';
@@ -46,7 +47,7 @@ class StoreList extends StatelessWidget {
                             CircleAvatar(
                               backgroundImage: NetworkImage(store.image != ''
                                   ? store.image
-                                  : 'https://firebasestorage.googleapis.com/v0/b/sadulur-umkm-app.appspot.com/o/store_default_icon.png?alt=media&token=3c8774b7-cc80-432a-95e8-12bd03e48592'),
+                                  : ConstPath.StoreDefaultNetwork),
                               minRadius: 30,
                               maxRadius: 50,
                               backgroundColor: ConstColor.lightgreyBG,

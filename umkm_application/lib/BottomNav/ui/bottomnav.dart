@@ -44,8 +44,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
       AnnouncementPage(),
       StoreDetail(
         //TODO: Change this
-        // uid: sharedPrefs.userid,
-        uid:  '1BxcK5j4ksfUmG3iu694syyNruf1',
+        uid: sharedPrefs.userid,
+        isFromProfilePage: true,
+        // uid:  '1BxcK5j4ksfUmG3iu694syyNruf1',
       )
     ];
   }
@@ -65,6 +66,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   return MaterialPageRoute(
                       builder: (context) => new StoreDetail(
                             uid: arg['uid'],
+                            isFromProfilePage: false,
                           ));
                 } else if (settings.name == StoreFormScreen.routeName) {
                   var arg = settings.arguments as Map;
@@ -157,7 +159,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       stateManagement: true,
       navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0 ? 0.0 : 64,
       hideNavigationBarWhenKeyboardShows: true,
-      margin: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 25.0),
+      margin: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
       popActionScreens: PopActionScreensType.all,
       bottomScreenMargin: 0.0,
       hideNavigationBar: _hideNavBar,

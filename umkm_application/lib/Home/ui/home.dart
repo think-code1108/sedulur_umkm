@@ -94,6 +94,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Stream<QuerySnapshot> homeStream() {
+    
+
+
     return searchQuery != ""
         ? stores
             .where(

@@ -180,12 +180,12 @@ class _EventPageState extends State<EventPage> {
       floatingActionButton: sharedPrefs.isMaster
           ? FloatingActionButton.extended(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EventFormScreen(
-                              event: Event.emptyEvent(),
-                            )));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => EventFormScreen(
+                //               event: Event.emptyEvent(),
+                //             )));
               },
               label: Text("Tambah Event"),
               icon: Icon(Icons.event_outlined),
@@ -203,7 +203,7 @@ class AlmostEndFloatFabLocation extends StandardFabLocation
   double getOffsetX(
       ScaffoldPrelayoutGeometry scaffoldGeometry, double adjustment) {
     final double directionalAdjustment =
-        scaffoldGeometry.textDirection == TextDirection.ltr ? 5.0 : 0;
+        scaffoldGeometry.textDirection == TextDirection.ltr ? 05.0 : 0;
     return super.getOffsetX(scaffoldGeometry, adjustment) +
         directionalAdjustment;
   }
@@ -212,7 +212,7 @@ class AlmostEndFloatFabLocation extends StandardFabLocation
   double getOffsetY(
       ScaffoldPrelayoutGeometry scaffoldGeometry, double adjustment) {
     final double directionalAdjustment =
-        scaffoldGeometry.textDirection == TextDirection.ltr ? 500 : 20;
+        scaffoldGeometry.textDirection == TextDirection.ltr ? 440 : 20;
     return super.getOffsetX(scaffoldGeometry, adjustment) +
         directionalAdjustment;
   }

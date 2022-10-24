@@ -10,13 +10,14 @@ import 'package:umkm_application/StoreDetail/ui/store_product.dart';
 import 'package:umkm_application/data/repositories/shared_pref_repositories.dart';
 
 class StoreDetail extends StatefulWidget {
-  StoreDetail({required this.uid, Key? key}) : super(key: key);
+  StoreDetail({required this.uid, required this.isFromProfilePage, Key? key}) : super(key: key);
 
   final String uid;
+  final bool isFromProfilePage;
   static const routeName = '/store/detail';
   @override
   _StoreDetailState createState() {
-    return _StoreDetailState(id: uid);
+    return _StoreDetailState(id: uid, isFromProfile: isFromProfilePage);
   }
 }
 
@@ -24,8 +25,10 @@ class StoreDetail extends StatefulWidget {
 class _StoreDetailState extends State<StoreDetail> {
   CollectionReference stores = FirebaseFirestore.instance.collection('stores');
   String id;
+  bool isFromProfile;
   _StoreDetailState({
     required this.id,
+    required this.isFromProfile
   });
 
   Widget _registerShop(BuildContext context, Store store) {
@@ -66,6 +69,7 @@ class _StoreDetailState extends State<StoreDetail> {
     super.initState();
     print('----- STORE ------');
     print(id);
+    print(isFromProfile);
   }
 
   @override
@@ -79,7 +83,7 @@ class _StoreDetailState extends State<StoreDetail> {
             color: ConstColor.darkDatalab,
           ));
         }
-        if (snapshot.data!.exists) {
+        if (!snapshot.data!.exists) {
           return Center(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -134,7 +138,7 @@ class _StoreDetailState extends State<StoreDetail> {
                 appBar: AppBar(
                   backgroundColor: ConstColor.darkDatalab,
                   elevation: 1,
-                  leading: IconButton(
+                  leading: (isFromProfile) ? SizedBox() : IconButton(
                       icon: Icon(Icons.keyboard_arrow_left,
                           color: ConstColor.secondaryTextDatalab),
                       onPressed: () => Navigator.pop(context)),

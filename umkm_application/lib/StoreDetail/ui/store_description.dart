@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:umkm_application/Authentication/Login/ui/loginscreen.dart';
+import 'package:umkm_application/Const/const_path.dart';
 import 'package:umkm_application/Model/store.dart';
 import 'package:umkm_application/StoreDetail/ui/description_form_page_screen.dart';
 import 'package:umkm_application/data/repositories/shared_pref_repositories.dart';
@@ -54,10 +55,9 @@ class _StoreDescriptionState extends State<StoreDescription> {
   Future<void> share(String phone, String message) async {
     var phoneNumber = '+' + phone;
     // ignore: non_constant_identifier_names
-    var whatsappURl_android =
-        "whatsapp://send?phone=" + phoneNumber + "&text=" + message;
-    if (await canLaunch(whatsappURl_android)) {
-      await launch(whatsappURl_android);
+    Uri whatsappURl_android = Uri.parse("whatsapp://send?phone=" + phoneNumber + "&text=" + message);
+    if (await canLaunchUrl(whatsappURl_android)) {
+      await launchUrl(whatsappURl_android);
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
@@ -65,8 +65,9 @@ class _StoreDescriptionState extends State<StoreDescription> {
   }
 
   void openLink(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, universalLinksOnly: true);
+    Uri _url = Uri.parse(url);
+    if (await canLaunchUrl(_url)) {
+      await launchUrl(_url);
     } else {
       print('There was a problem to open the url: $url');
     }
@@ -96,8 +97,7 @@ class _StoreDescriptionState extends State<StoreDescription> {
                             CircleAvatar(
                               backgroundImage: image != ''
                                   ? NetworkImage(image)
-                                  : NetworkImage(
-                                      'https://firebasestorage.googleapis.com/v0/b/umkm-application.appspot.com/o/store_default_icon.png?alt=media&token=6f762ddb-d559-493f-878e-da794afb84c9'),
+                                  : NetworkImage(ConstPath.StoreDefaultNetwork),
                               minRadius: 30,
                               maxRadius: 50,
                               backgroundColor: ConstColor.darkDatalab,
@@ -605,7 +605,7 @@ class AlmostEndFloatFabLocation extends StandardFabLocation
   double getOffsetY(
       ScaffoldPrelayoutGeometry scaffoldGeometry, double adjustment) {
     final double directionalAdjustment =
-        scaffoldGeometry.textDirection == TextDirection.ltr ? 350 : -10;
+        scaffoldGeometry.textDirection == TextDirection.ltr ? 320 : -10;
     return super.getOffsetX(scaffoldGeometry, adjustment) +
         directionalAdjustment;
   }

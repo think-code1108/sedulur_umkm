@@ -5,9 +5,10 @@ import '../Authentication/Login/ui/loginscreen.dart';
 import '../Const/const_color.dart';
 import '../data/repositories/user_repositories.dart';
 
-class titleApp extends StatelessWidget {
+class TitleApp extends StatelessWidget {
   final String title;
-  const titleApp(this.title, {Key? key}) : super(key: key);
+  final bool isLogout;
+  const TitleApp(this.title, this.isLogout, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +28,21 @@ class titleApp extends StatelessWidget {
                       fontWeight: FontWeight.w700))
             ],
           ),
-          IconButton(
-            onPressed: () async {
-              await UserRepository.signOut().then((user) {
-                Navigator.of(context, rootNavigator: true).pushReplacement(
-                    MaterialPageRoute(builder: (context) => new LoginScreen()));
-              });
-            },
-            icon: Icon(Icons.logout_outlined,
-                color: ConstColor.secondaryTextDatalab),
-          ),
+          (isLogout)
+              ? IconButton(
+                  onPressed: () async {
+                    await UserRepository.signOut().then((user) {
+                      Navigator.of(context, rootNavigator: true)
+                          .pushReplacement(MaterialPageRoute(
+                              builder: (context) => new LoginScreen()));
+                    });
+                  },
+                  icon: Icon(Icons.logout_outlined,
+                      color: ConstColor.secondaryTextDatalab),
+                )
+              : SizedBox(height: 0),
         ],
       ),
     );
-  
   }
 }

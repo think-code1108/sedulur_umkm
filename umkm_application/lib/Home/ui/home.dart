@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    titleApp('Daftar Anggota UMKM'),
+                    TitleApp('Daftar Anggota UMKM', true),
                     _search(),
                     _categoryWidget(),
                     _storeCard(),

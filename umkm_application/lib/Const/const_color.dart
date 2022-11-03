@@ -17,5 +17,6 @@ class ConstColor {
   static const Color deadlineRed = Color(0xffD8212B);
   static const Color greenText = Color(0xff5DB765);
   static const Color lightGrey = Color(0xffE4E4E4);
+  static const Color primaryNewColor = Color(0xFFFF5724);
 
 }

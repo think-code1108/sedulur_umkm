@@ -61,8 +61,9 @@ class _DummyStatisticPageState extends State<DummyStatisticPage> {
   }
 
   void openLink(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, universalLinksOnly: true);
+    Uri _url = Uri.parse(url);
+    if (await canLaunchUrl(_url)) {
+      await launchUrl(_url);
     } else {
       print('There was a problem to open the url: $url');
     }
@@ -158,27 +159,42 @@ class _DummyStatisticPageState extends State<DummyStatisticPage> {
                   Color(0xfff7f7f7),
                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    titleApp('Product Analysis'),
-                    SizedBox(height: height * 0.07),
-                    Text(
-                      'Dapatkan analisa secara nyata dari sosial media untuk produk-produk yang kamu jual! Data ini bisa digunakan untuk menganalisa penjualan dan penerimaan produk dalam masyarakat!',
-                      style: GoogleFonts.lato(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        color: ConstColor.darkDatalab,
+                    Expanded(
+                      flex: 1,
+                      child: TitleApp('Product Analysis', false),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'Dapatkan analisa secara nyata dari sosial media untuk produk-produk yang kamu jual! Data ini bisa digunakan untuk menganalisa penjualan dan penerimaan produk dalam masyarakat!',
+                        style: GoogleFonts.lato(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16,
+                          color: ConstColor.darkDatalab,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                    Image(
-                      image: AssetImage('assets/5024152.png'),
-                      fit: BoxFit.fitWidth,
+                    Expanded(
+                      flex: 3,
+                      child: Image(
+                        image: AssetImage('assets/5024152.png'),
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
-                    SizedBox(
-                      height: 20,
+                    
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: _coachingButton(context),
                     ),
-                    _coachingButton(context)
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                        height: 0,
+                      ),
+                    ),
                   ],
                 ),
               ),

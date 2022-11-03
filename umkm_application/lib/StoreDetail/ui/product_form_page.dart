@@ -277,6 +277,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
               final XFile? image =
                   await picker.pickImage(source: ImageSource.gallery);
               setState(() {
+
                 _imageFile = File(image!.path);
               });
             },

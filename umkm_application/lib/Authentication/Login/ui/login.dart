@@ -103,7 +103,10 @@ class _LoginPageState extends State<LoginPage> {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [ConstColor.darkDatalab, ConstColor.darkDatalab])),
+              colors: [
+                ConstColor.primaryNewColor,
+                ConstColor.primaryNewColor
+              ])),
       child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -119,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.symmetric(vertical: 15),
                 child: Text('Masuk',
                     style: TextStyle(
-                        fontSize: 20, color: ConstColor.secondaryTextDatalab))),
+                        fontSize: 20, color: ConstColor.backgroundDatalab))),
           )),
     );
   }
@@ -150,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'Daftar',
               style: TextStyle(
-                  color: ConstColor.secondaryTextDatalab,
+                  color: ConstColor.primaryNewColor,
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),
@@ -237,6 +240,10 @@ class _LoginPageState extends State<LoginPage> {
                     children: <Widget>[
                       SizedBox(height: height * .2),
                       SizedBox(height: 100),
+                      CircleAvatar(
+                        backgroundImage: AssetImage("assets/app_icon.png"),
+                        radius: 50.0,
+                      ),
                       _emailPasswordWidget(),
                       SizedBox(height: 20),
                       _submitButton(context),
@@ -251,7 +258,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: Container(
                           height: 100,
                           width: 100,
-                          child: CircularProgressIndicator(color: ConstColor.darkDatalab,)),
+                          child: CircularProgressIndicator(
+                            color: ConstColor.darkDatalab,
+                          )),
                     )
                   : Container(),
             ],

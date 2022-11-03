@@ -27,7 +27,7 @@ class BezierContainer extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [ConstColor.darkDatalab,ConstColor.darkDatalab]
+                colors: [ConstColor.primaryNewColor,ConstColor.primaryNewColor]
               )
             ),
         ),

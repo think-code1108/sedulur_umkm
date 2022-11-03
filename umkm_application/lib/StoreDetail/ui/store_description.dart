@@ -55,7 +55,8 @@ class _StoreDescriptionState extends State<StoreDescription> {
   Future<void> share(String phone, String message) async {
     var phoneNumber = '+' + phone;
     // ignore: non_constant_identifier_names
-    Uri whatsappURl_android = Uri.parse("whatsapp://send?phone=" + phoneNumber + "&text=" + message);
+    Uri whatsappURl_android =
+        Uri.parse("whatsapp://send?phone=" + phoneNumber + "&text=" + message);
     if (await canLaunchUrl(whatsappURl_android)) {
       await launchUrl(whatsappURl_android);
     } else {
@@ -135,13 +136,22 @@ class _StoreDescriptionState extends State<StoreDescription> {
                                     height: 25,
                                     child: ElevatedButton(
                                       onPressed: () async {
+                                        // await UserRepository.signOut()
+                                        //     .then((user) {
+                                        //   Navigator.push(
+                                        //       context,
+                                        //       MaterialPageRoute(
+                                        //           builder: (context) =>
+                                        //               LoginScreen()));
+                                        // });
                                         await UserRepository.signOut()
                                             .then((user) {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      LoginScreen()));
+                                          Navigator.of(context,
+                                                  rootNavigator: true)
+                                              .pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          new LoginScreen()));
                                         });
                                       },
                                       child: Text('Keluar'),
@@ -235,37 +245,43 @@ class _StoreDescriptionState extends State<StoreDescription> {
         ? Material(
             color: Colors.transparent,
             child: InkWell(
-                splashColor: Colors.transparent,
-                child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        elevation: 3,
-                        child: Padding(
-                            padding: EdgeInsets.all(15),
-                            child: Column(children: <Widget>[
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: Text('Video Promosi',
-                                    style: GoogleFonts.lato(
-                                        color: ConstColor.textDatalab,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w900)),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              YoutubePlayer(
-                                controller: _youtubeController,
-                                showVideoProgressIndicator: true,
-                                progressIndicatorColor: ConstColor.sbmlightBlue,
-                                progressColors: ProgressBarColors(
-                                    playedColor: ConstColor.sbmlightBlue,
-                                    handleColor: ConstColor.sbmdarkBlue),
-                              ),
-                            ]))))),
+              splashColor: Colors.transparent,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  elevation: 3,
+                  child: Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: Text('Video Promosi',
+                              style: GoogleFonts.lato(
+                                  color: ConstColor.textDatalab,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w900)),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        YoutubePlayer(
+                          controller: _youtubeController,
+                          showVideoProgressIndicator: true,
+                          progressIndicatorColor: ConstColor.sbmlightBlue,
+                          progressColors: ProgressBarColors(
+                              playedColor: ConstColor.sbmlightBlue,
+                              handleColor: ConstColor.sbmdarkBlue),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           )
         : Container();
   }
@@ -605,7 +621,7 @@ class AlmostEndFloatFabLocation extends StandardFabLocation
   double getOffsetY(
       ScaffoldPrelayoutGeometry scaffoldGeometry, double adjustment) {
     final double directionalAdjustment =
-        scaffoldGeometry.textDirection == TextDirection.ltr ? 320 : -10;
+        scaffoldGeometry.textDirection == TextDirection.ltr ? 300 : -10;
     return super.getOffsetX(scaffoldGeometry, adjustment) +
         directionalAdjustment;
   }

@@ -40,7 +40,7 @@ class _CoachingPageState extends State<CoachingPage> {
           child: InkWell(
             splashColor: Colors.blueGrey,
             onTap: () async {
-              openLink('https://datalab.sbm-itb.org/coaching-clinic-2/');
+              openLink();
             },
             child: Container(
                 alignment: Alignment.center,
@@ -53,11 +53,16 @@ class _CoachingPageState extends State<CoachingPage> {
     );
   }
 
-  void openLink(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, universalLinksOnly: true);
+  void openLink() async {
+    final Uri _url = Uri.parse('https://sadulur.site/');
+    // if (!await launchUrl(_url)) {
+    //   throw 'Could not launch $_url';
+    // }
+
+    if (await canLaunchUrl(_url)) {
+      await launchUrl(_url);
     } else {
-      print('There was a problem to open the url: $url');
+      print('There was a problem to open the url: $_url');
     }
   }
 
@@ -79,27 +84,35 @@ class _CoachingPageState extends State<CoachingPage> {
                   Color(0xfff7f7f7),
                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    titleApp('UMKM Coaching Clinic'),
-                    SizedBox(height: height * 0.1),
-                    SizedBox(
-                      height: 10,
+                    Expanded(
+                      flex: 1,
+                      child: TitleApp('UMKM Coaching Clinic', false),
                     ),
-                    Text(
-                      'Ikuti Coaching Clinic bersama mentor-mentor terbaik dari Sekolah Bisnis dan Manajemen ITB. Segera atur jadwalnya dan dapatkan ilmu baru untuk membuat UMKM anda melesat.',
-                      style: GoogleFonts.lato(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        color: ConstColor.darkDatalab,
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'Ikuti Coaching Clinic bersama mentor-mentor terbaik dari Sekolah Bisnis dan Manajemen ITB. Segera atur jadwalnya dan dapatkan ilmu baru untuk membuat UMKM anda melesat.',
+                        style: GoogleFonts.lato(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16,
+                          color: ConstColor.darkDatalab,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                    Image(image: AssetImage('assets/conference.png')),
-                    SizedBox(
-                      height: 20,
+                    Expanded(
+                      flex: 2,
+                      child: Image(
+                        image: AssetImage('assets/conference.png'),
+                      ),
                     ),
-                    _coachingButton(context)
+                    _coachingButton(context),
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(),
+                    )
                   ],
                 ),
               ),

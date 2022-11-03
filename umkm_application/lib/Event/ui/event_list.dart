@@ -111,39 +111,104 @@ class _EventPageState extends State<EventPage> {
 
   Widget _pastEventTitle(String title) {
     return Material(
-        color: Colors.transparent,
-        child: InkWell(
-            splashColor: Colors.transparent,
-            onTap: () {
-              setState(() {
-                _pastVisible = !_pastVisible;
-              });
-            },
-            child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: Text(
-                          title,
-                          style: GoogleFonts.lato(
-                              color: ConstColor.textDatalab,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.start,
-                        )),
-                    Container(
-                        child: Icon(
-                            _pastVisible
-                                ? Icons.arrow_drop_up_rounded
-                                : Icons.arrow_drop_down_rounded,
-                            size: 30,
-                            color: ConstColor.darkDatalab))
-                  ],
-                ))));
+      color: Colors.transparent,
+      child: InkWell(
+        splashColor: Colors.transparent,
+        onTap: () {
+          setState(() {
+            _pastVisible = !_pastVisible;
+          });
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: Text(
+                    title,
+                    style: GoogleFonts.lato(
+                        color: ConstColor.textDatalab,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.start,
+                  )),
+              Container(
+                  child: Icon(
+                      _pastVisible
+                          ? Icons.arrow_drop_up_rounded
+                          : Icons.arrow_drop_down_rounded,
+                      size: 30,
+                      color: ConstColor.darkDatalab))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _titleApp(bool isMaster) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(10, 15, 15, 5),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text('Events',
+              style: GoogleFonts.lato(
+                  color: ConstColor.textDatalab,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700)),
+          (isMaster)
+              ? InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventFormScreen(
+                          event: Event.emptyEvent(),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: ConstColor.darkDatalab,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.add_box,
+                              color: ConstColor.secondaryTextDatalab,
+                              size: 30,
+                            ),
+                            Text(
+                              " Add",
+                              style: TextStyle(
+                                color: ConstColor.secondaryTextDatalab,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox(
+                  height: 0,
+                ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -163,7 +228,7 @@ class _EventPageState extends State<EventPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      titleApp('Event List'),
+                      _titleApp(sharedPrefs.isMaster),
                       SizedBox(height: 10),
                       _upcomingEventTitle("Event Berikutnya"),
                       Visibility(
@@ -177,22 +242,22 @@ class _EventPageState extends State<EventPage> {
                   )))
         ]),
       ),
-      floatingActionButton: sharedPrefs.isMaster
-          ? FloatingActionButton.extended(
-              onPressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => EventFormScreen(
-                //               event: Event.emptyEvent(),
-                //             )));
-              },
-              label: Text("Tambah Event"),
-              icon: Icon(Icons.event_outlined),
-              backgroundColor: ConstColor.darkDatalab,
-            )
-          : Container(),
-      floatingActionButtonLocation: AlmostEndFloatFabLocation(),
+      // floatingActionButton: sharedPrefs.isMaster
+      //     ? FloatingActionButton.extended(
+      //         onPressed: () {
+      //           // Navigator.push(
+      //           //     context,
+      //           //     MaterialPageRoute(
+      //           //         builder: (context) => EventFormScreen(
+      //           //               event: Event.emptyEvent(),
+      //           //             )));
+      //         },
+      //         label: Text("Tambah Event"),
+      //         icon: Icon(Icons.event_outlined),
+      //         backgroundColor: ConstColor.darkDatalab,
+      //       )
+      //     : Container(),
+      // floatingActionButtonLocation: AlmostEndFloatFabLocation(),
     );
   }
 }
@@ -212,7 +277,7 @@ class AlmostEndFloatFabLocation extends StandardFabLocation
   double getOffsetY(
       ScaffoldPrelayoutGeometry scaffoldGeometry, double adjustment) {
     final double directionalAdjustment =
-        scaffoldGeometry.textDirection == TextDirection.ltr ? 440 : 20;
+        scaffoldGeometry.textDirection == TextDirection.ltr ? 250 : 20;
     return super.getOffsetX(scaffoldGeometry, adjustment) +
         directionalAdjustment;
   }

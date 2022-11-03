@@ -38,7 +38,7 @@ class TitleApp extends StatelessWidget {
                     });
                   },
                   icon: Icon(Icons.logout_outlined,
-                      color: ConstColor.secondaryTextDatalab),
+                      color: ConstColor.primaryNewColor),
                 )
               : SizedBox(height: 0),
         ],

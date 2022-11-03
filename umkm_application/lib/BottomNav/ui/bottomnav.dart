@@ -35,6 +35,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
   }
 
   List<Widget> _buildScreens() {
+
+    String id = sharedPrefs.userid;
+
     return [
       HomePage(title: "Home Page"),
       EventPage(),
@@ -44,7 +47,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
       AnnouncementPage(),
       StoreDetail(
         //TODO: Change this
-        uid: sharedPrefs.userid,
+
+        uid: (id.isNotEmpty) ? id : "123",
         isFromProfilePage: true,
         // uid:  '1BxcK5j4ksfUmG3iu694syyNruf1',
       )

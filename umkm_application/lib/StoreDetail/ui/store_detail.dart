@@ -70,6 +70,11 @@ class _StoreDetailState extends State<StoreDetail> {
     print('----- STORE ------');
     print(id);
     print(isFromProfile);
+
+    String _id = sharedPrefs.userid;
+    if (_id.isNotEmpty && isFromProfile) { //--> Jika id shared pref ada, ambil dari share prefs
+      id = _id;
+    }
   }
 
   @override

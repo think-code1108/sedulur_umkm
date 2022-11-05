@@ -18,27 +18,21 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:umkm_application/StoreDetail/ui/store_detail.dart';
 
 class ProductFormPage extends StatefulWidget {
-  ProductFormPage(
-      {required this.umkmid,
-      required this.product,
-      Key? key})
+  ProductFormPage({required this.umkmid, required this.product, Key? key})
       : super(key: key);
 
   final String umkmid;
   final Product product;
 
   @override
-  _ProductFormPageState createState() => _ProductFormPageState(
-      umkmid: umkmid,
-      product : product);
+  _ProductFormPageState createState() =>
+      _ProductFormPageState(umkmid: umkmid, product: product);
 }
 
 class _ProductFormPageState extends State<ProductFormPage> {
   final String umkmid;
   final Product product;
-  _ProductFormPageState(
-      {required this.umkmid,
-      required this.product});
+  _ProductFormPageState({required this.umkmid, required this.product});
 
   TextEditingController nameProductController = TextEditingController(text: "");
   TextEditingController descriptionController = TextEditingController(text: "");
@@ -59,10 +53,14 @@ class _ProductFormPageState extends State<ProductFormPage> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: ConstColor.secondaryTextDatalab),
+              child: Icon(Icons.keyboard_arrow_left,
+                  color: ConstColor.secondaryTextDatalab),
             ),
             Text('Kembali',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color:ConstColor.secondaryTextDatalab))
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: ConstColor.secondaryTextDatalab))
           ],
         ),
       ),
@@ -79,7 +77,10 @@ class _ProductFormPageState extends State<ProductFormPage> {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15,color: ConstColor.textDatalab),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: ConstColor.textDatalab),
           ),
           SizedBox(
             height: 10,
@@ -166,7 +167,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [ConstColor.darkDatalab,ConstColor.darkDatalab])),
+              colors: [ConstColor.darkDatalab, ConstColor.darkDatalab])),
       child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -192,8 +193,10 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(vertical: 15),
-                child: Text(product.id != "" ? 'Update Produk' : "Tambah Produk",
-                    style: TextStyle(fontSize: 20, color: ConstColor.secondaryTextDatalab))),
+                child: Text(
+                    product.id != "" ? 'Update Produk' : "Tambah Produk",
+                    style: TextStyle(
+                        fontSize: 20, color: ConstColor.secondaryTextDatalab))),
           )),
     );
   }
@@ -212,7 +215,10 @@ class _ProductFormPageState extends State<ProductFormPage> {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [ConstColor.failedNotification,ConstColor.failedNotification])),
+              colors: [
+                ConstColor.failedNotification,
+                ConstColor.failedNotification
+              ])),
       child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -268,7 +274,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [ConstColor.darkDatalab,ConstColor.darkDatalab])),
+              colors: [ConstColor.darkDatalab, ConstColor.darkDatalab])),
       child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -276,10 +282,12 @@ class _ProductFormPageState extends State<ProductFormPage> {
             onTap: () async {
               final XFile? image =
                   await picker.pickImage(source: ImageSource.gallery);
-              setState(() {
 
-                _imageFile = File(image!.path);
-              });
+              if (image != null) {
+                setState(() {
+                  _imageFile = File(image.path);
+                });
+              }
             },
             child: Container(
                 alignment: Alignment.center,
@@ -308,7 +316,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
           "Masukkan Harga Produk",
           priceController,
         ),
-        _imagePicker("Gambar Event")
+        _imagePicker("Gambar Produk")
       ],
     );
   }
@@ -317,7 +325,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
     AlertDialog alert = AlertDialog(
       content: new Row(
         children: [
-          CircularProgressIndicator(color: ConstColor.darkDatalab,),
+          CircularProgressIndicator(
+            color: ConstColor.darkDatalab,
+          ),
           Container(
               margin: EdgeInsets.only(left: 7), child: Text("Loading...")),
         ],
@@ -471,13 +481,13 @@ class _ProductFormPageState extends State<ProductFormPage> {
           reverseAnimationCurve: Curves.decelerate,
           forwardAnimationCurve: Curves.elasticOut,
           leftBarIndicatorColor: Colors.blue[300],
-        )..show(context).then((r) =>                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => StoreDetail(
-                              uid: umkmid,
-                              isFromProfilePage: false,
-                            ))));
+        )..show(context).then((r) => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => StoreDetail(
+                      uid: umkmid,
+                      isFromProfilePage: false,
+                    ))));
       }
 
       if (state is StoreLoading) {
@@ -521,7 +531,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
                         child: Container(
                             height: 100,
                             width: 100,
-                            child: CircularProgressIndicator(color: ConstColor.darkDatalab,)),
+                            child: CircularProgressIndicator(
+                              color: ConstColor.darkDatalab,
+                            )),
                       )
                     : Container()
               ],

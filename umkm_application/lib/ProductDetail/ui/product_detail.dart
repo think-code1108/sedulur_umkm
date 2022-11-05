@@ -50,8 +50,10 @@ class _ProductDetailState extends State<ProductDetail> {
     // ignore: non_constant_identifier_names
     var whatsappURl_android =
         "whatsapp://send?phone=" + phoneNumber + "&text=" + message;
-    if (await canLaunch(whatsappURl_android)) {
-      await launch(whatsappURl_android);
+    
+    Uri _uriWA = Uri.parse(whatsappURl_android);
+    if (await canLaunchUrl(_uriWA)) {
+      await launchUrl(_uriWA);
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
@@ -59,8 +61,9 @@ class _ProductDetailState extends State<ProductDetail> {
   }
 
   void openLink(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, universalLinksOnly: true);
+    Uri _uri = Uri.parse(url);
+    if (await canLaunchUrl(_uri)) {
+      await launchUrl(_uri);
     } else {
       print('There was a problem to open the url: $url');
     }

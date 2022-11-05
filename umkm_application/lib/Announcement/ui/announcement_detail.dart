@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
-import 'package:another_flushbar/flushbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -11,12 +10,9 @@ import 'package:umkm_application/Const/const_color.dart';
 import 'package:umkm_application/Model/announcement.dart';
 import 'package:umkm_application/data/repositories/shared_pref_repositories.dart';
 import 'package:url_launcher/url_launcher.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:intl/intl.dart';
-import 'package:open_file/open_file.dart';
+import 'package:open_file_safe/open_file_safe.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-// import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class AnnouncementDetail extends StatefulWidget {
   AnnouncementDetail({Key? key, required this.announcementID})
@@ -74,8 +70,10 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
     // ignore: non_constant_identifier_names
     var whatsappURl_android =
         "whatsapp://send?phone=" + phoneNumber + "&text=" + message;
-    if (await canLaunch(whatsappURl_android)) {
-      await launch(whatsappURl_android);
+    Uri _uriWA = Uri.parse(whatsappURl_android);
+
+    if (await canLaunchUrl(_uriWA)) {
+      await launchUrl(_uriWA);
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
@@ -83,8 +81,9 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
   }
 
   void openLink(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, universalLinksOnly: true);
+    Uri _uri = Uri.parse(url);
+    if (await canLaunchUrl(_uri)) {
+      await launchUrl(_uri);
     } else {
       print('There was a problem to open the url: $url');
     }

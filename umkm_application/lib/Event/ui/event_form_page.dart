@@ -192,9 +192,12 @@ class _EventFormPageState extends State<EventFormPage> {
             onTap: () async {
               final XFile? image =
                   await picker.pickImage(source: ImageSource.gallery);
-              setState(() {
-                _imageFile = File(image!.path);
-              });
+              
+              if (image != null) {
+                setState(() {
+                  _imageFile = File(image.path);
+                });
+              }
             },
             child: Container(
                 alignment: Alignment.center,

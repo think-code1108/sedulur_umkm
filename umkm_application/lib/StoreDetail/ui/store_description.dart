@@ -112,12 +112,15 @@ class _StoreDescriptionState extends State<StoreDescription> {
                                     child: ElevatedButton(
                                       onPressed: () async {
                                         ImagePicker picker = ImagePicker();
+
                                         final XFile? image =
                                             await picker.pickImage(
                                                 source: ImageSource.gallery);
-                                        File _imageFile = File(image!.path);
-                                        await StoreRepository.updateImage(
-                                            id, _imageFile);
+                                        if (image != null) {
+                                          File _imageFile = File(image.path);
+                                          await StoreRepository.updateImage(
+                                              id, _imageFile);
+                                        }
                                       },
                                       child: Text('Ubah Foto'),
                                       style: ElevatedButton.styleFrom(
@@ -581,6 +584,38 @@ class _StoreDescriptionState extends State<StoreDescription> {
                               store.shopeeName ?? '',
                               store.bukalapakName ?? '',
                               store.name),
+                          SizedBox(height: 5),
+                          (_userID == id)
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
+                                  child: Material(
+                                    color: ConstColor.darkDatalab,
+                                    child: InkWell(
+                                      splashColor: Colors.blueGrey,
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, StoreFormScreen.routeName,
+                                            arguments: {'store': store});
+                                      },
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 15),
+                                          child: Text('Sunting Profile',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: ConstColor
+                                                      .secondaryTextDatalab))),
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(
+                                  height: 0,
+                                  width: 0,
+                                ),
                           SizedBox(
                             height: 100,
                           ),
@@ -588,18 +623,18 @@ class _StoreDescriptionState extends State<StoreDescription> {
                       )))
             ]),
           ),
-          floatingActionButton: _userID == id
-              ? FloatingActionButton.extended(
-                  onPressed: () {
-                    Navigator.pushNamed(context, StoreFormScreen.routeName,
-                        arguments: {'store': store});
-                  },
-                  label: Text("Sunting Profile"),
-                  icon: Icon(Icons.edit),
-                  backgroundColor: ConstColor.darkDatalab,
-                )
-              : Container(),
-          floatingActionButtonLocation: AlmostEndFloatFabLocation(),
+          // floatingActionButton: _userID == id
+          //     ? FloatingActionButton.extended(
+          //         onPressed: () {
+          // Navigator.pushNamed(context, StoreFormScreen.routeName,
+          //     arguments: {'store': store});
+          //         },
+          //         label: Text("Sunting Profile"),
+          //         icon: Icon(Icons.edit),
+          //         backgroundColor: ConstColor.darkDatalab,
+          //       )
+          //     : Container(),
+          // floatingActionButtonLocation: AlmostEndFloatFabLocation(),
         );
       },
     );

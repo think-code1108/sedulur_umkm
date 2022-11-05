@@ -148,6 +148,38 @@ class _StoreProductState extends State<StoreProduct> {
           SizedBox(
             height: 10,
           ),
+          (sharedPrefs.userid == umkmid)
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Material(
+                    color: ConstColor.darkDatalab,
+                    child: InkWell(
+                      splashColor: Colors.blueGrey,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductFormScreen(
+                                    umkmid: umkmid, product: emptyProduct)));
+                      },
+                      child: Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          child: Text('Tambah Produk',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: ConstColor.secondaryTextDatalab))),
+                    ),
+                  ),
+                )
+              : SizedBox(
+                  height: 0,
+                  width: 0,
+                ),
+          SizedBox(
+            height: 10,
+          ),
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 5), child: _search()),
           SizedBox(
@@ -157,21 +189,21 @@ class _StoreProductState extends State<StoreProduct> {
           SizedBox(height: 100),
         ],
       ),
-      floatingActionButton: sharedPrefs.userid == umkmid
-          ? FloatingActionButton.extended(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProductFormScreen(
-                            umkmid: umkmid, product: emptyProduct)));
-              },
-              label: Text("Tambah Produk"),
-              icon: Icon(Icons.add),
-              backgroundColor: ConstColor.darkDatalab,
-            )
-          : Container(),
-      floatingActionButtonLocation: AlmostEndFloatFabLocation(),
+      // floatingActionButton: sharedPrefs.userid == umkmid
+      //     ? FloatingActionButton.extended(
+      //         onPressed: () {
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => ProductFormScreen(
+      //             umkmid: umkmid, product: emptyProduct)));
+      //         },
+      //         label: Text("Tambah Produk"),
+      //         icon: Icon(Icons.add),
+      //         backgroundColor: ConstColor.darkDatalab,
+      //       )
+      //     : Container(),
+      // floatingActionButtonLocation: AlmostEndFloatFabLocation(),
     );
   }
 }
